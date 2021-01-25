@@ -32,44 +32,45 @@ public class no2468 {
 
 			}
 		}
-		int answer = 0;
-		for (int i = 0; i < 100; i++) {
-			int cnt = 0;
+		
+	
+		int result=0;
+		for (int i = 0; i <= 100; i++) {
+			int cnt=0;
 			for (int j = 0; j < N; j++) {
 				for (int k = 0; k < N; k++) {
-					if (board[j][k] < i) {
+					if (board[j][k] <= i) {
 						visited[j][k] = true;
 					}
 				}
 			}
-			for (int a = 0; a < N; a++) {
-				for (int w = 0; w < N; w++) {
-					if (!visited[a][w]) {
+			for (int j = 0; j < N; j++) {
+				for (int k = 0; k < N; k++) {
+					if (!visited[j][k]) {
 						Queue<Batch> que = new LinkedList<Batch>();
-						visited[a][w] = true;
-						que.offer(new Batch(a, w));
+						visited[j][k] = true;
+						que.add(new Batch(j, k));
 						while (!que.isEmpty()) {
 							Batch now = que.peek();
 							que.poll();
 							for (int u = 0; u < 4; u++) {
 								int nx = now.x + A1[u];
 								int ny = now.y + B1[u];
-								if (nx >= 0 && nx < N && ny >= 0 && ny < N && !visited[nx][nx]) {
+								if (nx >= 0 && nx < N && ny >= 0 && ny < N && !visited[nx][ny]) {
 									visited[nx][ny] = true;
-									que.offer(new Batch(nx, ny));
+									que.add(new Batch(nx, ny));
 								}
-
 							}
 						}
-						
+						cnt+=1;
 					}
 					
 				}
-				cnt++;
 			}
-			answer = Math.max(answer, cnt);	
+			result=Math.max(result, cnt);
 		}
-		System.out.println(answer);
+		
+		System.out.println(result);
 
 	}
 
