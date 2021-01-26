@@ -14,16 +14,15 @@ class Batch {
 public class no2468 {
 	static int N;
 	static int board[][] = new int[N][N];
-	static boolean visited[][] = new boolean[N][N];
 	static int A1[] = new int[] { -1, 0, 1, 0 };
 	static int B1[] = new int[] { 0, 1, 0, -1 };
+	static Queue <Batch> que = new LinkedList<Batch>();
 
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String x = br.readLine();
 		N = Integer.parseInt(x);
 		board = new int[N][N];
-		visited = new boolean[N][N];
 		for (int i = 0; i < N; i++) {
 			String xx = br.readLine();
 			for (int j = 0; j < N; j++) {
@@ -37,6 +36,7 @@ public class no2468 {
 		int result=0;
 		for (int i = 0; i <= 100; i++) {
 			int cnt=0;
+			boolean visited[][] = new boolean[N][N];
 			for (int j = 0; j < N; j++) {
 				for (int k = 0; k < N; k++) {
 					if (board[j][k] <= i) {
@@ -47,7 +47,6 @@ public class no2468 {
 			for (int j = 0; j < N; j++) {
 				for (int k = 0; k < N; k++) {
 					if (!visited[j][k]) {
-						Queue<Batch> que = new LinkedList<Batch>();
 						visited[j][k] = true;
 						que.add(new Batch(j, k));
 						while (!que.isEmpty()) {
@@ -62,11 +61,12 @@ public class no2468 {
 								}
 							}
 						}
-						cnt+=1;
+						cnt++;
 					}
 					
 				}
 			}
+			
 			result=Math.max(result, cnt);
 		}
 		
